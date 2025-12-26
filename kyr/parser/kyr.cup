@@ -1,0 +1,79 @@
+package kyr.parser;
+
+import java.util.*;
+import java_cup.runtime.*;
+
+import kyr.ast.*;
+import kyr.symtable.*;
+import kyr.ast.expressions.*;
+import kyr.ast.statements.*;
+import kyr.exceptions.*;
+
+action code {: :};
+
+parser code {:
+    public void report_error(String message, Object info) {
+        if (info instanceof Symbol) {
+            Symbol sym = (Symbol) info;
+            String tokenText = sym.value != null ? sym.value.toString() : "<empty>";
+            int line = sym.left;
+            int col  = sym.right;
+            throw new SyntaxError("line " + line + ", col " + col + ": " + message + " (token: " + tokenText  +")");
+        } else {
+            throw new SyntaxError(message);
+        }
+    }
+
+    public void report_fatal_error(String message, Object info) {
+        report_error(message, info);
+    }
+:};
+
+/* ------------Declaration of Terminals and Non Terminals Section----------- */
+
+/* Terminals (tokens returned by the scanner).  */
+
+terminal Symbol BEGIN, END, SEMICOLON, PRINT;
+terminal String INTEGER, STRING;
+
+/* Non terminals used in the grammar section.  */
+
+non terminal ASTNode PROG;
+non terminal Sequence SEQ_NE;    // non-empty sequence of statements
+non terminal Sequence SEQUENCE;  // possibly empty sequence of statements
+non terminal Statement STATEMENT;
+non terminal Expression EXP;
+
+/* ----------------------------Grammar Section-------------------- */
+
+start with PROG;
+
+PROG      ::=   BEGIN SEQUENCE:li END
+                {: RESULT = new Program(li); :}
+                ;
+
+SEQUENCE  ::=   SEQ_NE:li {: RESULT = li; :}
+        |
+                {: RESULT = new Sequence(-1); :}
+                ;
+
+SEQ_NE    ::=   SEQ_NE:li  STATEMENT:i
+                {: li.add(i); RESULT = li; :}
+        |
+                STATEMENT:i
+                {: Sequence b = new Sequence(ileft + 1);
+                   b.add(i);
+                   RESULT = b; :}
+                ;
+
+STATEMENT ::=   PRINT EXP:e SEMICOLON
+                {: RESULT = new Print(e, eleft + 1); :}
+        |
+                PRINT STRING:cc SEMICOLON
+                {: StringConstant c = new StringConstant(cc, ccleft + 1);
+                   SymbolTable.getInstance().add(c);
+                   RESULT = new Print(c, ccleft); :}
+                ;
+
+EXP       ::=   INTEGER:c
+                {: RESULT = new IntegerConstant(c, cleft + 1); :};

@@ -1,0 +1,591 @@
+variables
+    // Sum of prime factors (with repetition) of a number n.
+    // E.g., 40 factors as 2^3 * 5 and sopfr(40) = 2 * 3 + 5 = 11.
+    // It is also known as the integer logarithm.
+    // https://oeis.org/A001414
+
+    entier div
+    entier stack0 entier stack1 entier stack2 entier stack3 entier stack4 entier stack5 entier stack6 entier stack7 entier stack8 entier stack9 entier stack10 entier stack11 entier stack12 entier stack13 entier stack14 entier stack15 entier stack16 entier stack17 entier stack18 entier stack19 entier stack20 entier stack21 entier stack22 entier stack23 entier stack24 entier stack25 entier stack26 entier stack27 entier stack28 entier stack29 entier stack30 entier stack31 entier stack32 entier stack33 entier stack34 entier stack35 entier stack36 entier stack37 entier stack38 entier stack39 entier stack40 entier stack41 entier stack42 entier stack43 entier stack44 entier stack45 entier stack46 entier stack47 entier stack48 entier stack49 entier stack50 entier stack51 entier stack52 entier stack53 entier stack54 entier stack55 entier stack56 entier stack57 entier stack58 entier stack59 entier stack60 entier stack61 entier stack62 entier stack63
+    entier stacksize
+    entier tmp1 entier tmp2 entier tmp3 booleen tmp4 entier tmp5
+
+fonctions
+    entier get() debut
+        si tmp1 < 32 alors
+            si tmp1 < 16 alors
+                si tmp1 < 8 alors
+                    si tmp1 < 4 alors
+                        si tmp1 < 2 alors
+                            si tmp1 < 1 alors
+                                retourne stack0;
+                            sinon
+                                retourne stack1;
+                            finsi
+                        sinon
+                            si tmp1 < 3 alors
+                                retourne stack2;
+                            sinon
+                                retourne stack3;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp1 < 6 alors
+                            si tmp1 < 5 alors
+                                retourne stack4;
+                            sinon
+                                retourne stack5;
+                            finsi
+                        sinon
+                            si tmp1 < 7 alors
+                                retourne stack6;
+                            sinon
+                                retourne stack7;
+                            finsi
+                        finsi
+                    finsi
+                sinon
+                    si tmp1 < 12 alors
+                        si tmp1 < 10 alors
+                            si tmp1 < 9 alors
+                                retourne stack8;
+                            sinon
+                                retourne stack9;
+                            finsi
+                        sinon
+                            si tmp1 < 11 alors
+                                retourne stack10;
+                            sinon
+                                retourne stack11;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp1 < 14 alors
+                            si tmp1 < 13 alors
+                                retourne stack12;
+                            sinon
+                                retourne stack13;
+                            finsi
+                        sinon
+                            si tmp1 < 15 alors
+                                retourne stack14;
+                            sinon
+                                retourne stack15;
+                            finsi
+                        finsi
+                    finsi
+                finsi
+            sinon
+                si tmp1 < 24 alors
+                    si tmp1 < 20 alors
+                        si tmp1 < 18 alors
+                            si tmp1 < 17 alors
+                                retourne stack16;
+                            sinon
+                                retourne stack17;
+                            finsi
+                        sinon
+                            si tmp1 < 19 alors
+                                retourne stack18;
+                            sinon
+                                retourne stack19;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp1 < 22 alors
+                            si tmp1 < 21 alors
+                                retourne stack20;
+                            sinon
+                                retourne stack21;
+                            finsi
+                        sinon
+                            si tmp1 < 23 alors
+                                retourne stack22;
+                            sinon
+                                retourne stack23;
+                            finsi
+                        finsi
+                    finsi
+                sinon
+                    si tmp1 < 28 alors
+                        si tmp1 < 26 alors
+                            si tmp1 < 25 alors
+                                retourne stack24;
+                            sinon
+                                retourne stack25;
+                            finsi
+                        sinon
+                            si tmp1 < 27 alors
+                                retourne stack26;
+                            sinon
+                                retourne stack27;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp1 < 30 alors
+                            si tmp1 < 29 alors
+                                retourne stack28;
+                            sinon
+                                retourne stack29;
+                            finsi
+                        sinon
+                            si tmp1 < 31 alors
+                                retourne stack30;
+                            sinon
+                                retourne stack31;
+                            finsi
+                        finsi
+                    finsi
+                finsi
+            finsi
+        sinon
+            si tmp1 < 48 alors
+                si tmp1 < 40 alors
+                    si tmp1 < 36 alors
+                        si tmp1 < 34 alors
+                            si tmp1 < 33 alors
+                                retourne stack32;
+                            sinon
+                                retourne stack33;
+                            finsi
+                        sinon
+                            si tmp1 < 35 alors
+                                retourne stack34;
+                            sinon
+                                retourne stack35;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp1 < 38 alors
+                            si tmp1 < 37 alors
+                                retourne stack36;
+                            sinon
+                                retourne stack37;
+                            finsi
+                        sinon
+                            si tmp1 < 39 alors
+                                retourne stack38;
+                            sinon
+                                retourne stack39;
+                            finsi
+                        finsi
+                    finsi
+                sinon
+                    si tmp1 < 44 alors
+                        si tmp1 < 42 alors
+                            si tmp1 < 41 alors
+                                retourne stack40;
+                            sinon
+                                retourne stack41;
+                            finsi
+                        sinon
+                            si tmp1 < 43 alors
+                                retourne stack42;
+                            sinon
+                                retourne stack43;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp1 < 46 alors
+                            si tmp1 < 45 alors
+                                retourne stack44;
+                            sinon
+                                retourne stack45;
+                            finsi
+                        sinon
+                            si tmp1 < 47 alors
+                                retourne stack46;
+                            sinon
+                                retourne stack47;
+                            finsi
+                        finsi
+                    finsi
+                finsi
+            sinon
+                si tmp1 < 56 alors
+                    si tmp1 < 52 alors
+                        si tmp1 < 50 alors
+                            si tmp1 < 49 alors
+                                retourne stack48;
+                            sinon
+                                retourne stack49;
+                            finsi
+                        sinon
+                            si tmp1 < 51 alors
+                                retourne stack50;
+                            sinon
+                                retourne stack51;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp1 < 54 alors
+                            si tmp1 < 53 alors
+                                retourne stack52;
+                            sinon
+                                retourne stack53;
+                            finsi
+                        sinon
+                            si tmp1 < 55 alors
+                                retourne stack54;
+                            sinon
+                                retourne stack55;
+                            finsi
+                        finsi
+                    finsi
+                sinon
+                    si tmp1 < 60 alors
+                        si tmp1 < 58 alors
+                            si tmp1 < 57 alors
+                                retourne stack56;
+                            sinon
+                                retourne stack57;
+                            finsi
+                        sinon
+                            si tmp1 < 59 alors
+                                retourne stack58;
+                            sinon
+                                retourne stack59;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp1 < 62 alors
+                            si tmp1 < 61 alors
+                                retourne stack60;
+                            sinon
+                                retourne stack61;
+                            finsi
+                        sinon
+                            si tmp1 < 63 alors
+                                retourne stack62;
+                            sinon
+                                si (tmp1 == 63) alors
+                                    retourne stack63;
+                                sinon
+                                    ecrire "stack overflow\n";
+                                finsi
+                            finsi
+                        finsi
+                    finsi
+                finsi
+            finsi
+        finsi
+        retourne 0;
+    fin
+
+    booleen set() debut
+        si tmp2 < 32 alors
+            si tmp2 < 16 alors
+                si tmp2 < 8 alors
+                    si tmp2 < 4 alors
+                        si tmp2 < 2 alors
+                            si tmp2 < 1 alors
+                                stack0 = tmp3;
+                            sinon
+                                stack1 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 3 alors
+                                stack2 = tmp3;
+                            sinon
+                                stack3 = tmp3;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp2 < 6 alors
+                            si tmp2 < 5 alors
+                                stack4 = tmp3;
+                            sinon
+                                stack5 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 7 alors
+                                stack6 = tmp3;
+                            sinon
+                                stack7 = tmp3;
+                            finsi
+                        finsi
+                    finsi
+                sinon
+                    si tmp2 < 12 alors
+                        si tmp2 < 10 alors
+                            si tmp2 < 9 alors
+                                stack8 = tmp3;
+                            sinon
+                                stack9 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 11 alors
+                                stack10 = tmp3;
+                            sinon
+                                stack11 = tmp3;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp2 < 14 alors
+                            si tmp2 < 13 alors
+                                stack12 = tmp3;
+                            sinon
+                                stack13 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 15 alors
+                                stack14 = tmp3;
+                            sinon
+                                stack15 = tmp3;
+                            finsi
+                        finsi
+                    finsi
+                finsi
+            sinon
+                si tmp2 < 24 alors
+                    si tmp2 < 20 alors
+                        si tmp2 < 18 alors
+                            si tmp2 < 17 alors
+                                stack16 = tmp3;
+                            sinon
+                                stack17 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 19 alors
+                                stack18 = tmp3;
+                            sinon
+                                stack19 = tmp3;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp2 < 22 alors
+                            si tmp2 < 21 alors
+                                stack20 = tmp3;
+                            sinon
+                                stack21 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 23 alors
+                                stack22 = tmp3;
+                            sinon
+                                stack23 = tmp3;
+                            finsi
+                        finsi
+                    finsi
+                sinon
+                    si tmp2 < 28 alors
+                        si tmp2 < 26 alors
+                            si tmp2 < 25 alors
+                                stack24 = tmp3;
+                            sinon
+                                stack25 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 27 alors
+                                stack26 = tmp3;
+                            sinon
+                                stack27 = tmp3;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp2 < 30 alors
+                            si tmp2 < 29 alors
+                                stack28 = tmp3;
+                            sinon
+                                stack29 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 31 alors
+                                stack30 = tmp3;
+                            sinon
+                                stack31 = tmp3;
+                            finsi
+                        finsi
+                    finsi
+                finsi
+            finsi
+        sinon
+            si tmp2 < 48 alors
+                si tmp2 < 40 alors
+                    si tmp2 < 36 alors
+                        si tmp2 < 34 alors
+                            si tmp2 < 33 alors
+                                stack32 = tmp3;
+                            sinon
+                                stack33 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 35 alors
+                                stack34 = tmp3;
+                            sinon
+                                stack35 = tmp3;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp2 < 38 alors
+                            si tmp2 < 37 alors
+                                stack36 = tmp3;
+                            sinon
+                                stack37 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 39 alors
+                                stack38 = tmp3;
+                            sinon
+                                stack39 = tmp3;
+                            finsi
+                        finsi
+                    finsi
+                sinon
+                    si tmp2 < 44 alors
+                        si tmp2 < 42 alors
+                            si tmp2 < 41 alors
+                                stack40 = tmp3;
+                            sinon
+                                stack41 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 43 alors
+                                stack42 = tmp3;
+                            sinon
+                                stack43 = tmp3;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp2 < 46 alors
+                            si tmp2 < 45 alors
+                                stack44 = tmp3;
+                            sinon
+                                stack45 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 47 alors
+                                stack46 = tmp3;
+                            sinon
+                                stack47 = tmp3;
+                            finsi
+                        finsi
+                    finsi
+                finsi
+            sinon
+                si tmp2 < 56 alors
+                    si tmp2 < 52 alors
+                        si tmp2 < 50 alors
+                            si tmp2 < 49 alors
+                                stack48 = tmp3;
+                            sinon
+                                stack49 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 51 alors
+                                stack50 = tmp3;
+                            sinon
+                                stack51 = tmp3;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp2 < 54 alors
+                            si tmp2 < 53 alors
+                                stack52 = tmp3;
+                            sinon
+                                stack53 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 55 alors
+                                stack54 = tmp3;
+                            sinon
+                                stack55 = tmp3;
+                            finsi
+                        finsi
+                    finsi
+                sinon
+                    si tmp2 < 60 alors
+                        si tmp2 < 58 alors
+                            si tmp2 < 57 alors
+                                stack56 = tmp3;
+                            sinon
+                                stack57 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 59 alors
+                                stack58 = tmp3;
+                            sinon
+                                stack59 = tmp3;
+                            finsi
+                        finsi
+                    sinon
+                        si tmp2 < 62 alors
+                            si tmp2 < 61 alors
+                                stack60 = tmp3;
+                            sinon
+                                stack61 = tmp3;
+                            finsi
+                        sinon
+                            si tmp2 < 63 alors
+                                stack62 = tmp3;
+                            sinon
+                                si tmp2 == 63 alors
+                                    stack63 = tmp3;
+                                sinon
+                                    ecrire "stack overflow\n";
+                                    retourne faux;
+                                finsi
+                            finsi
+                        finsi
+                    finsi
+                finsi
+            finsi
+        finsi
+        retourne vrai;
+    fin
+
+    entier sopfr() debut
+        tmp2 = stacksize;
+        tmp3 = 0;
+        tmp4 = set();
+        stacksize = stacksize + 1;
+
+        tmp1 = stacksize-2;
+        si get() % div == 0 alors
+            tmp2 = stacksize-1;
+            tmp3 = div;
+            tmp4 = set();
+            tmp1 = stacksize-2;
+            si get()!=div alors
+                tmp1 = stacksize-2;
+                tmp2 = stacksize;
+                tmp3 = get()/div;
+                tmp4 = set();
+                stacksize = stacksize+1;
+                tmp5 = sopfr();
+                stacksize = stacksize-1;
+                tmp1 = stacksize-1;
+                tmp2 = stacksize-1;
+                tmp3 = get() + tmp5;
+                tmp4 = set();
+            finsi
+        sinon
+            div = div + 1;
+            tmp1 = stacksize-2;
+            tmp2 = stacksize;
+            tmp3 = get();
+            tmp4 = set();
+            stacksize = stacksize+1;
+            tmp5 = sopfr();
+            stacksize = stacksize-1;
+            tmp2 = stacksize-1;
+            tmp3 = tmp5;
+            tmp4 = set();
+        finsi
+
+        stacksize = stacksize - 1;
+        tmp1 = stacksize;
+        retourne get();
+    fin
+
+debut
+    stacksize = 0;
+    div = 2;
+    tmp2 = stacksize;
+    tmp3 = 40; // this is the value we are computing sopfr of
+    tmp4 = set();
+    stacksize = stacksize + 1;
+    ecrire sopfr();
+    ecrire "\n";
+    stacksize = stacksize - 1;
+fin
+

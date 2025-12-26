@@ -1,0 +1,16 @@
+variables
+entier a
+entier b
+entier c
+debut
+a = 12;
+b = 13;
+c = a;
+a = b;
+b = c;
+ecrire a;
+ecrire b; ecrire "\n";
+ecrire c;
+fin
+
+// retourne 1312\n12

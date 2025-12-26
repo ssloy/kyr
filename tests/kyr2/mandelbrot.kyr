@@ -1,0 +1,66 @@
+variables
+    // constantes
+    entier l
+    entier w
+    entier h
+    entier s
+
+    // variables
+    entier x
+    entier y
+    entier r
+    entier v
+    entier d
+    entier e
+    entier a
+    entier z
+
+debut
+    l = 19;
+    w = 80;
+    h = 25;
+    s = 8192;
+
+    y = 0;
+    repeter
+        r = -(125*s)/100 + ((25*s/10)*y)/h;
+        x = 0;
+        repeter
+            v = -2*s + ((25*s/10)*x)/w;
+            d = 0;
+            e = 0;
+            a = -1;
+            repeter
+                z = (d*d-e*e)/s+v;
+                e = (d+d)*e/s + r;
+                d = z;
+                a = a + 1;
+            jusqua a>=l ou d*d+e*e>=4*s*s ;
+
+            si a==0  alors ecrire "."; finsi
+            si a==1  alors ecrire ","; finsi
+            si a==2  alors ecrire "'"; finsi
+            si a==3  alors ecrire "~"; finsi
+            si a==4  alors ecrire "="; finsi
+            si a==5  alors ecrire "+"; finsi
+            si a==6  alors ecrire ":"; finsi
+            si a==7  alors ecrire ";"; finsi
+            si a==8  alors ecrire "["; finsi
+            si a==9  alors ecrire "/"; finsi
+            si a==10 alors ecrire "<"; finsi
+            si a==11 alors ecrire "&"; finsi
+            si a==12 alors ecrire "?"; finsi
+            si a==13 alors ecrire "o"; finsi
+            si a==14 alors ecrire "x"; finsi
+            si a==15 alors ecrire "O"; finsi
+            si a==16 alors ecrire "X"; finsi
+            si a==17 alors ecrire "#"; finsi
+            si a>=18 alors ecrire " "; finsi
+
+            x = x + 1;
+        jusqua x>=w ;
+        ecrire "\n";
+        y = y + 1;
+    jusqua y>=h ;
+fin
+
