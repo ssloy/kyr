@@ -1,10 +1,146 @@
-## 1. Language Definition
+## 1. The Kyr compiler project
 
-The **Kyr** (short for kyrielle) language is a rudimentary statically typed programming language that includes integer and boolean variables, basic control structures, and functions.
+This repository contains a jumpstart code for my students, it won't evolve to a compiler.
+The compiler must be developed in **Java**, using the parser generators **JFlex** and **JavaCup**.
+It generates **MIPS assembly code**.
+
+To allow easy automation of tests, the following constraints must be respected:
+
+* The compiler is delivered as the archive `kyrN.jar`, where `N` is the kernel version.
+  Execution requires exactly one argument: the name of the file containing the program to compile, with the `.kyr` suffix.
+  If compilation succeeds, a file with the same prefix and the `.mips` suffix is created, containing the generated target code.
+* Execution is non-interactive; aside from the generated `.mips` file, it must leave the caller’s environment unchanged.
+* Depending on the case, execution produces **exactly one** of the following outputs on standard output (and nothing else):
+
+```
+ERREUR LEXICALE :  no ligne d'erreur suivie d'un message d'erreur explicite
+ERREUR SYNTAXIQUE :  no ligne d'erreur suivie d'un message d'erreur explicite
+ERREUR SEMANTIQUE : no ligne d'erreur suivie d'un message d'erreur explicite
+COMPILATION OK
+```
+
+* A lexical or syntactic error stops compilation immediately. All detected semantic errors must be reported.
 
 ---
 
-## 1.1 Grammar
+## 2. Project Organization
+
+The compiler must be developed through successive **language kernels**.
+Once a kernel compiler is finished and fully tested, you must immediately start developing the next kernel.
+Conversely, it is useless to start a new kernel before the previous one is fully completed and tested.
+
+---
+
+## 2.1 Kyr0 Grammar – printing only
+
+The compiler only processes programs with printing instructions; only the grammar excerpt below is required.
+
+```ebnf
+<programme> ::= 'debut' { <instruction> } 'fin'
+
+<instruction> ::= 'ecrire' <expression> ';'
+                | 'ecrire' string ';'
+
+<expression> ::= integer | 'vrai' | 'faux'
+```
+
+---
+
+## 2.2 Language Kernels and Submission Deadlines
+
+For the following kernels, it is your responsibility to extract the appropriate rules from the full grammar.
+
+| **Kernel** | **Language Constructs Supported**                                                                      | **Submission Deadline (kyrN.jar)**       |
+| ---------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
+| Kyr0       | Output instruction<br>Comments                                                                         | Week 3 – Friday, January 16 – 8:00 PM    |
+| Kyr1       | Variable declarations (integer/boolean)<br>Assignment<br>Expressions reduced to constants or variables | Week 5 – Thursday, January 29 – 8:00 PM  |
+| Kyr2       | Arbitrary expressions without function calls<br>Conditional instruction<br>Loop instruction            | Week 8 – Thursday, February 19 – 8:00 PM |
+| Kyr3       | Function without parameters or local variables<br>Expressions with function calls                      | Week 10 – Thursday, March 5 – 8:00 PM    |
+| Kyr4       | Functions with parameters and local integer and boolean variables                                      | Week 13 – Thursday, March 26 – 8:00 PM   |
+
+---
+
+
+## 3. Language Definition
+
+The **Kyr** (short for kyrielle) language is a rudimentary statically typed programming language that includes integer and boolean variables, basic control structures, and functions.
+
+Here is a short example program written in Kyr:
+
+```c++
+variables
+    // constantes
+    entier l
+    entier w
+    entier h
+    entier s
+
+    // variables
+    entier x
+    entier y
+    entier r
+    entier v
+    entier d
+    entier e
+    entier a
+    entier z
+
+debut
+    l = 19;
+    w = 80;
+    h = 25;
+    s = 8192;
+
+    y = 0;
+    repeter
+        r = -(125*s)/100 + ((25*s/10)*y)/h;
+        x = 0;
+        repeter
+            v = -2*s + ((25*s/10)*x)/w;
+            d = 0;
+            e = 0;
+            a = -1;
+            repeter
+                z = (d*d-e*e)/s+v;
+                e = (d+d)*e/s + r;
+                d = z;
+                a = a + 1;
+            jusqua a>=l ou d*d+e*e>=4*s*s ;
+
+            si a==0  alors ecrire "."; finsi
+            si a==1  alors ecrire ","; finsi
+            si a==2  alors ecrire "'"; finsi
+            si a==3  alors ecrire "~"; finsi
+            si a==4  alors ecrire "="; finsi
+            si a==5  alors ecrire "+"; finsi
+            si a==6  alors ecrire ":"; finsi
+            si a==7  alors ecrire ";"; finsi
+            si a==8  alors ecrire "["; finsi
+            si a==9  alors ecrire "/"; finsi
+            si a==10 alors ecrire "<"; finsi
+            si a==11 alors ecrire "&"; finsi
+            si a==12 alors ecrire "?"; finsi
+            si a==13 alors ecrire "o"; finsi
+            si a==14 alors ecrire "x"; finsi
+            si a==15 alors ecrire "O"; finsi
+            si a==16 alors ecrire "X"; finsi
+            si a==17 alors ecrire "#"; finsi
+            si a>=18 alors ecrire " "; finsi
+
+            x = x + 1;
+        jusqua x>=w ;
+        ecrire "\n";
+        y = y + 1;
+    jusqua y>=h ;
+fin
+```
+And the corresponding output:
+
+![](https://haqr.eu/tinycompiler/home/mandelbrot.png)
+
+---
+
+## 3.1 Grammar
 
 The grammar of the language is written in **EBNF (Extended Backus–Naur Form)** and uses the following conventions:
 
@@ -82,7 +218,7 @@ For example, a Kyr program may contain an identifier `SI`, which will not be con
 
 ---
 
-## 1.2 Semantics
+## 3.2 Semantics
 
 * A program consists of variable declarations, function declarations, and instructions.
   When the program is executed, instructions are executed in the order in which they are written.
@@ -115,77 +251,4 @@ For example, a Kyr program may contain an identifier `SI`, which will not be con
 
 * In a function call, the compiler selects the function signature based on the number of actual parameters.
   Parameters are passed by value.
-
----
-
-## 2. The Kyr Compiler
-
-The Kyr compiler must be developed in **Java**, using the parser generators **JFlex** and **JavaCup**.
-It generates **MIPS assembly code**.
-
-To allow easy automation of tests, the following constraints must be respected:
-
-* The compiler is delivered as the archive `kyrN.jar`, where `N` is the kernel version.
-  Execution requires exactly one argument: the name of the file containing the program to compile, with the `.kyr` suffix.
-  If compilation succeeds, a file with the same prefix and the `.mips` suffix is created, containing the generated target code.
-* Execution is non-interactive; aside from the generated `.mips` file, it must leave the caller’s environment unchanged.
-* Depending on the case, execution produces **exactly one** of the following outputs on standard output (and nothing else):
-
-```
-LEXICAL ERROR: line number : explicit error message
-SYNTAX ERROR:  line number : explicit error message
-SEMANTIC ERROR: line number : explicit error message
-COMPILATION OK
-```
-
-* A lexical or syntactic error stops compilation immediately.
-  All detected semantic errors must be reported.
-
----
-
-## 3. Project Organization
-
-You will work in pairs; no exceptions are allowed except in the case of an odd number of students.
-You must quickly register your names on the dedicated form on Arche.
-
-Each group will have a dedicated project on the university GitLab.
-You must upload the project sources, as well as the Kyr source files used to test the compiler, progressively as versions evolve.
-
-The compiler must be developed through successive **language kernels**.
-Once a kernel compiler is finished and fully tested, you must immediately start developing the next kernel.
-Conversely, it is useless to start a new kernel before the previous one is fully completed and tested.
-
-The deadlines listed below correspond to the dates on which automatic tests for each version will be run.
-
----
-
-## 3.1 Kyr0 Grammar – Output Only
-
-The compiler only processes programs with output instructions; only the grammar excerpt below is required.
-
-```ebnf
-<programme> ::= 'debut' { <instruction> } 'fin'
-
-<instruction> ::= 'ecrire' <expression> ';'
-                | 'ecrire' string ';'
-
-<expression> ::= integer | 'vrai' | 'faux'
-```
-
----
-
-## 3.2 Language Kernels and Submission Deadlines
-
-For the following kernels, it is your responsibility to extract the appropriate rules from the full grammar.
-
-| **Kernel** | **Language Constructs Supported**                                                                      | **Submission Deadline (kyrN.jar)**       |
-| ---------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
-| Kyr0       | Output instruction<br>Comments                                                                         | Week 3 – Friday, January 16 – 8:00 PM    |
-| Kyr1       | Variable declarations (integer/boolean)<br>Assignment<br>Expressions reduced to constants or variables | Week 5 – Thursday, January 29 – 8:00 PM  |
-| Kyr2       | Arbitrary expressions without function calls<br>Conditional instruction<br>Loop instruction            | Week 8 – Thursday, February 19 – 8:00 PM |
-| Kyr3       | Function without parameters or local variables<br>Expressions with function calls                      | Week 10 – Thursday, March 5 – 8:00 PM    |
-| Kyr4       | Functions with parameters and local integer and boolean variables                                      | Week 13 – Thursday, March 26 – 8:00 PM   |
-
----
-
 
